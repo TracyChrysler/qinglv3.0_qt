@@ -141,7 +141,6 @@ private:
     uint8_t mSendBuf[100];
     uint8_t mSendCmd[100];
     uint8_t mSendpcbuf[200];
-    QTimer *mTimer2;
     QTimer *mSaveTimer;
     QTimer *periodicQueryTimer;
     QString mTemp_Flag;

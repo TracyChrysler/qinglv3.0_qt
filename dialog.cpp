@@ -1359,7 +1359,6 @@ void Dialog::RecData()
         for (uint16_t i = 0; i < recvData.size(); ++i){
             qDebug("<0x%x>",  *(uint8_t *)(pdata + i));
         }
-        mTimer2->stop();
         if (recvData.isEmpty())
             return;
 
@@ -1469,6 +1468,11 @@ void Dialog::send_Data(uint8_t *buf, uint8_t len)
 
 void Dialog::periodicQuery()
 {
+    if (mSerialPort->isOpen()) {
+        qDebug() << "The port is opened" << mSerialPort->portName();
+    } else {
+        qDebug() << mSerialPort->portName() << "is closed";
+    }
     uint8_t buf[1] = { 0 };
     buf[0] = 0XAB;
     sendToKz(CMD_PERODIC_QUERY, buf, 1);
