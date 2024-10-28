@@ -637,7 +637,7 @@ bool Dialog::setSerialPortConfig()
     }
 
     // 返回串口打开结果 true/false
-    bool suc = mSerialPort->open(QIODevice::WriteOnly);
+    bool suc = mSerialPort->open(QIODevice::ReadWrite);
     if (!suc) {
         qDebug() << "Failed to open port" << mSerialPort->portName()
                  << "Error:" << mSerialPort->errorString()
