@@ -2,26 +2,6 @@
 #include "ui_dialog.h"
 #include "savedata.h"
 #include "param.h"
-#include <QSerialPortInfo>
-#include <QList>
-#include <QDebug>
-#include <QLineEdit>
-#include <QTimer>
-#include <QSize>
-#include <QByteArray>
-#include <QDateTime>
-#include <QFileDialog>
-#include <QCoreApplication>
-#include <QDir>
-#include <QStringList>
-#include <QPushButton>
-#include <QString>
-#include <QPalette>
-#include <QStringList>
-#include <QVariantMap>
-#include <stdio.h>
-#include <string.h>
-#include <QtSerialPort>
 
 #define READ_BUFFER_SIZE 200
 
@@ -65,7 +45,7 @@ Dialog::Dialog(QWidget *parent)
     mSerialPort = new QSerialPort(this);
     // 定时器 用于定时查询
     periodicQueryTimer = new QTimer(this);
-    connect(periodicQueryTimer, &QTimer::timeout, this, &Dialog::periodicQuery);
+    //connect(periodicQueryTimer, &QTimer::timeout, this, &Dialog::periodicQuery);
     periodicQueryTimer->start(PERIODIC_QUERY_TIME);
     // 智能识别当前系统有效端口号
     QStringList newPortStringList;
@@ -82,7 +62,6 @@ Dialog::Dialog(QWidget *parent)
         ui->CBoxSerialPort->addItems(oldPortStringList);
     }
 
-    //connect(mSerialPort, SIGNAL(readyRead()), this, SLOT(RecData()));
     connect(mSerialPort, &QSerialPort::readyRead, this, &Dialog::RecData);
 
     connect(ui->pushButton_saveStart, &QPushButton::clicked, [=](){
@@ -126,17 +105,13 @@ Dialog::Dialog(QWidget *parent)
     connect(mSaveTimer, &QTimer::timeout, this, &Dialog::SaveData);
 
     connect(ui->pushButton_write, &QPushButton::clicked, [=](){
-        uint8_t n = 3;
-        while(n--)
-        {
-            SetParsing();
-        }
-
+        SetParsing();
     });
+
     connect(ui->pushButton_read, &QPushButton::clicked, [=](){
         if (mIsOpen)
         {
-            uint8_t buf[4] = { 0 };
+            uint8_t buf[1] = { 0 };
             buf[0] = 0X01;
             sendToKz(CMD_NORMALPARAM_READ, buf, 1);
         }
@@ -145,7 +120,7 @@ Dialog::Dialog(QWidget *parent)
     connect(ui->pushButton_init, &QPushButton::clicked, [=](){
         if (mIsOpen)
         {
-            uint8_t buf[4] = { 0 };
+            uint8_t buf[1] = { 0 };
             buf[0] = 0X02;
             sendToKz(CMD_NORMALPARAM_READ, buf, 1);
         }
@@ -154,22 +129,20 @@ Dialog::Dialog(QWidget *parent)
     connect(ui->pushButton_weixiu, &QPushButton::clicked, [=](){
         if (mWeixiu_Flag)
         {
-            uint32_t i = 0;
-            mSendBuf[i++] = MODE_MAINTAIN;
-            mSendBuf[i++] = OPEN;
-            sendToKz(CMD_NMOP_SWITCH, mSendBuf, i);
+            uint8_t buf[2] = { 0 };
+            buf[0] = MODE_MAINTAIN;
+            buf[1] = OPEN;
+            sendToKz(CMD_MODE_SWITCH, buf, 2);
             ui->pushButton_weixiu->setText("维修模式开");
-            show_PromptInformation("维修模式：关！！！");
             ui->pushButton_weixiu->setStyleSheet("background-color: rgb(85, 170, 127); color: rgb(255, 255, 255)");
         }
         else
         {
-            uint32_t i = 0;
-            mSendBuf[i++] = MODE_MAINTAIN;
-            mSendBuf[i++] = CLOSE;
-            sendToKz(CMD_NMOP_SWITCH, mSendBuf, i);
+            uint8_t buf[2] = { 0 };
+            buf[0] = MODE_MAINTAIN;
+            buf[1] = CLOSE;
+            sendToKz(CMD_MODE_SWITCH, buf, 2);
             ui->pushButton_weixiu->setText("维修模式关");
-            show_PromptInformation("维修模式：开！！！");
             ui->pushButton_weixiu->setStyleSheet("background-color: rgb(0, 85, 0); color: rgb(255, 255, 255)");
         }
         mWeixiu_Flag = !mWeixiu_Flag;
@@ -180,22 +153,20 @@ Dialog::Dialog(QWidget *parent)
         {
             if (mGuFen_Flag)
             {
-                uint32_t i = 0;
-                mSendBuf[i++] = DEVICE_BLOWER;
-                mSendBuf[i++] = OPEN;
-                sendToKz(CMD_NMOP_SWITCH, mSendBuf, i);
+                uint8_t buf[2] = { 0 };
+                buf[0] = DEVICE_BLOWER;
+                buf[1] = OPEN;
+                sendToKz(CMD_NMOP_SWITCH, buf, 2);
                 ui->pushButton_gfjck->setText("关闭");
-                show_PromptInformation("鼓风机常开：开！！！");
                 ui->pushButton_gfjck->setStyleSheet("background-color: rgb(0, 85, 0); color: rgb(255, 255, 255)");
             }
             else
             {
-                uint32_t i = 0;
-                mSendBuf[i++] = DEVICE_BLOWER;
-                mSendBuf[i++] = CLOSE;
-                sendToKz(CMD_NMOP_SWITCH, mSendBuf, i);
+                uint8_t buf[2] = { 0 };
+                buf[0] = DEVICE_BLOWER;
+                buf[1] = CLOSE;
+                sendToKz(CMD_NMOP_SWITCH, buf, 2);
                 ui->pushButton_gfjck->setText("打开");
-                show_PromptInformation("鼓风机常开：关！！！");
                 ui->pushButton_gfjck->setStyleSheet("background-color: rgb(85, 170, 127); color: rgb(255, 255, 255)");
             }
             mGuFen_Flag = !mGuFen_Flag;
@@ -208,22 +179,20 @@ Dialog::Dialog(QWidget *parent)
         {
             if (mFenSan_Flag)
             {
-                uint32_t i = 0;
-                mSendBuf[i++] = DEVICE_FAN;
-                mSendBuf[i++] = OPEN;
-                sendToKz(CMD_NMOP_SWITCH, mSendBuf, i);
+                uint8_t buf[2] = { 0 };
+                buf[0] = DEVICE_FAN;
+                buf[1] = OPEN;
+                sendToKz(CMD_NMOP_SWITCH, buf, 2);
                 ui->pushButton_fsck->setText("关闭");
-                show_PromptInformation("冷却风扇常开：开！！！");
                 ui->pushButton_fsck->setStyleSheet("background-color: rgb(0, 85, 0); color: rgb(255, 255, 255)");
             }
             else
             {
-                uint32_t i = 0;
-                mSendBuf[i++] = DEVICE_FAN;
-                mSendBuf[i++] = CLOSE;
-                sendToKz(CMD_NMOP_SWITCH, mSendBuf, i);
+                uint8_t buf[2] = { 0 };
+                buf[0] = DEVICE_FAN;
+                buf[1] = CLOSE;
+                sendToKz(CMD_NMOP_SWITCH, buf, 2);
                 ui->pushButton_fsck->setText("打开");
-                show_PromptInformation("冷却风扇常开：关！！！");
                 ui->pushButton_fsck->setStyleSheet("background-color: rgb(85, 170, 127); color: rgb(255, 255, 255)");
             }
             mFenSan_Flag = !mFenSan_Flag;
@@ -236,22 +205,20 @@ Dialog::Dialog(QWidget *parent)
         {
             if (mQingIn_Flag)
             {
-                uint32_t i = 0;
-                mSendBuf[i++] = DEVICE_VALVEIN;
-                mSendBuf[i++] = OPEN;
-                sendToKz(CMD_NMOP_SWITCH, mSendBuf, i);
+                uint8_t buf[2] = { 0 };
+                buf[0] = DEVICE_VALVEIN;
+                buf[1] = OPEN;
+                sendToKz(CMD_NMOP_SWITCH, buf, 2);
                 ui->pushButton_qingin->setText("关闭");
-                show_PromptInformation("氢气进口：开！！！");
                 ui->pushButton_qingin->setStyleSheet("background-color: rgb(0, 85, 0); color: rgb(255, 255, 255)");
             }
             else
             {
-                uint32_t i = 0;
-                mSendBuf[i++] = DEVICE_VALVEIN;
-                mSendBuf[i++] = CLOSE;
-                sendToKz(CMD_NMOP_SWITCH, mSendBuf, i);
+                uint8_t buf[2] = { 0 };
+                buf[0] = DEVICE_VALVEIN;
+                buf[1] = CLOSE;
+                sendToKz(CMD_NMOP_SWITCH, buf, 2);
                 ui->pushButton_qingin->setText("打开");
-                show_PromptInformation("氢气进口：关！！！");
                 ui->pushButton_qingin->setStyleSheet("background-color: rgb(85, 170, 127); color: rgb(255, 255, 255)");
             }
             mQingIn_Flag = !mQingIn_Flag;
@@ -339,22 +306,20 @@ Dialog::Dialog(QWidget *parent)
         {
             if (mQingOut_Flag)
             {
-                uint32_t i = 0;
-                mSendBuf[i++] = DEVICE_VALVEOUT;
-                mSendBuf[i++] = OPEN;
-                sendToKz(CMD_NMOP_SWITCH, mSendBuf, i);
+                uint8_t buf[2] = { 0 };
+                buf[0] = DEVICE_VALVEOUT;
+                buf[1] = OPEN;
+                sendToKz(CMD_NMOP_SWITCH, buf, 2);
                 ui->pushButton_qingout->setText("关闭");
-                show_PromptInformation("氢气出口：开！");
                 ui->pushButton_qingout->setStyleSheet("background-color: rgb(0, 85, 0); color: rgb(255, 255, 255)");
             }
             else
             {
-                uint32_t i = 0;
-                mSendBuf[i++] = DEVICE_VALVEOUT;
-                mSendBuf[i++] = CLOSE;
-                sendToKz(CMD_NMOP_SWITCH, mSendBuf, i);
+                uint8_t buf[2] = { 0 };
+                buf[0] = DEVICE_VALVEOUT;
+                buf[1] = CLOSE;
+                sendToKz(CMD_NMOP_SWITCH, buf, 2);
                 ui->pushButton_qingout->setText("打开");
-                show_PromptInformation("氢气出口：关！");
                 ui->pushButton_qingout->setStyleSheet("background-color: rgb(85, 170, 127); color: rgb(255, 255, 255)");
             }
             mQingOut_Flag = !mQingOut_Flag;
@@ -439,36 +404,13 @@ Dialog::Dialog(QWidget *parent)
     });
 
     connect(ui->pushButton_WXRead, &QPushButton::clicked, [=](){
-        if (mIsOpen)
+        if (mWeixiu_Flag)
         {
-            uint32_t i = 0;
-            uint32_t tempuint;
-            float tempfl;
-
-            mSendBuf[i++] = 0X01;
-            mSendBuf[i++] = ui->lineEdit_cycleTIM->text().toUInt();
-
-            tempfl = ui->lineEdit_Exhausttime_Y1->text().toFloat();
-            tempuint = tempfl * 10;
-            mSendBuf[i++] = (uint8_t)(tempuint);
-            mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
-            // 燃料电池温度上限
-            tempfl = ui->lineEdit_WXranliaoTemperMAX->text().toFloat();
-            tempuint = tempfl * 10;
-            mSendBuf[i++] = (uint8_t)(tempuint);
-            mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
-            // 燃料电池运行目标温度
-            tempfl = ui->lineEdit_WXranliaoTargetTemper->text().toFloat();
-            tempuint = tempfl * 10;
-            mSendBuf[i++] = (uint8_t)(tempuint);
-            mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
-            mSendBuf[i++] = ui->lineEdit_GFJ_PWM->text().toUInt();
-
-            sendToKz(CMD_RM_SETTING, mSendBuf, i);
-
+            uint8_t buf[14] = { 0 };
+            buf[0] = 0X01;
+            sendToKz(CMD_RM_SETTING, buf, 14);
+        } else {
+            show_PromptInformation_Red("请先打开维修模式！");
         }
     });
 
@@ -477,33 +419,9 @@ Dialog::Dialog(QWidget *parent)
     connect(ui->pushButton_WXInit, &QPushButton::clicked, [=](){
         if (mWeixiu_Flag)
         {
-            uint32_t i = 0;
-            uint32_t tempuint;
-            float tempfl;
-
-            mSendBuf[i++] = 0X03;
-            mSendBuf[i++] = ui->lineEdit_cycleTIM->text().toUInt();
-
-            tempfl = ui->lineEdit_Exhausttime_Y1->text().toFloat();
-            tempuint = tempfl * 10;
-            mSendBuf[i++] = (uint8_t)(tempuint);
-            mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
-            // 燃料电池温度上限
-            tempfl = ui->lineEdit_WXranliaoTemperMAX->text().toFloat();
-            tempuint = tempfl * 10;
-            mSendBuf[i++] = (uint8_t)(tempuint);
-            mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
-            // 燃料电池运行目标温度
-            tempfl = ui->lineEdit_WXranliaoTargetTemper->text().toFloat();
-            tempuint = tempfl * 10;
-            mSendBuf[i++] = (uint8_t)(tempuint);
-            mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
-            mSendBuf[i++] = ui->lineEdit_GFJ_PWM->text().toUInt();
-
-            sendToKz(CMD_RM_SETTING, mSendBuf, i);
+            uint8_t buf[14] = { 0 };
+            buf[0] = 0X03;
+            sendToKz(CMD_RM_SETTING, buf, 14);
         }
         else
         {
@@ -516,22 +434,20 @@ Dialog::Dialog(QWidget *parent)
         {
             if (mMoNi_Flag)
             {
-                uint32_t i = 0;
-                mSendBuf[i++] = MODE_IMITATE;
-                mSendBuf[i++] = OPEN;
-                sendToKz(CMD_NMOP_SWITCH, mSendBuf, i);
+                uint8_t buf[2] = { 0 };
+                buf[0] = MODE_IMITATE;
+                buf[1] = OPEN;
+                sendToKz(CMD_MODE_SWITCH, buf, 2);
                 ui->pushButton_moni->setText("模拟关");
-                show_PromptInformation("模拟：开！！！");
                 ui->pushButton_moni->setStyleSheet("background-color: rgb(0, 85, 0); color: rgb(255, 255, 255)");
             }
             else
             {
-                uint32_t i = 0;
-                mSendBuf[i++] = MODE_IMITATE;
-                mSendBuf[i++] = CLOSE;
-                sendToKz(CMD_NMOP_SWITCH, mSendBuf, i);
+                uint8_t buf[2] = { 0 };
+                buf[0] = MODE_IMITATE;
+                buf[1] = CLOSE;
+                sendToKz(CMD_MODE_SWITCH, buf, 2);
                 ui->pushButton_moni->setText("模拟开");
-                show_PromptInformation("模拟：关！！！");
                 ui->pushButton_moni->setStyleSheet("background-color: rgb(85, 170, 127); color: rgb(255, 255, 255)");
             }
             mMoNi_Flag = !mMoNi_Flag;
@@ -713,12 +629,14 @@ void Dialog::on_BtnOpen_clicked()
 
 unsigned char Dialog::checkcrc8(uint8_t * buf ,uint32_t len)
 {
+    qDebug("checkcrc8");
     uint32_t sum = 0;
     uint32_t i;
     for(i=0;i<len;i++)
     {
         sum+=buf[i];
     }
+    qDebug("2222222 The sum : <0x%x>", (uint8_t)sum);
     return (uint8_t)sum;
 }
 
@@ -746,62 +664,18 @@ float Dialog::uint32ToFloat(uint32_t intValue)
 // 解析数据
 void Dialog::ParsingData()
 {
-    // if(mRec_Buf[0]!=0xAA || mRec_Buf[1]!=0xBB || mRec_Buf[3]!=0x2A)  //校验协议
-    // {
-    //     mRec_cnt = 0;
-    //     return;
-    // }
-
     if(mRec_Buf[OFFSET_CRC] != checkcrc8(mRec_Buf + OFFSET_CMD, mRec_Buf[OFFSET_LEN] + SZ_LEN + SZ_CMD))
     {
+        qDebug() << "mRec_Buf[OFFSET_CRC] != checkcrc8(mRec_Buf + OFFSET_CMD, mRec_Buf[OFFSET_LEN] + SZ_LEN + SZ_CMD)";
         mRec_cnt = 0;
         return;
     }
 
     if (mRec_Buf[OFFSET_CMD] == CMD_PERODIC_QUERY)
     {
+        qDebug() << "mRec_Buf[OFFSET_CRC] == checkcrc8(mRec_Buf + OFFSET_CMD, mRec_Buf[OFFSET_LEN] + SZ_LEN + SZ_CMD)";
         memcpy(UN_Cyc_InquireData.G_Cyc_InquireData_8, mRec_Buf + SZ_OVERHEAD, mRec_Buf[OFFSET_LEN]);
-        // Byte6   报警信息
-        //if ((mRec_Buf[i] &0x01) == 1)   // bit0 过温
-        //{
-        //    ui->label_temp_flag->setText("温度高");
-        //    ui->label_temp_flag->setStyleSheet("background-color: rgb(225, 0, 0);");
-        //    mTemp_Flag = "1";
-        //}
-        //else
-        //{
-        //    ui->label_temp_flag->setText("正常");
-        //    ui->label_temp_flag->setStyleSheet("background-color: rgb(85, 170, 127);");
-        //    mTemp_Flag = "0";
-        //}
 
-        //if ((mRec_Buf[i] &0x02) == 2)   // bit1 氢量低
-        //{
-        //    ui->label_qing_flag->setText("氢量低");
-        //    ui->label_qing_flag->setStyleSheet("background-color: rgb(225, 0, 0);");
-        //    mQing_Flag = "1";
-        //}
-        //else
-        //{
-        //    ui->label_qing_flag->setText("正常");
-        //    ui->label_qing_flag->setStyleSheet("background-color: rgb(85, 170, 127);");
-        //    mQing_Flag = "0";
-        //}
-
-        //if ((mRec_Buf[i] &0x04) == 4)   // bit2 欠压
-        //{
-        //    ui->label_V_flag->setText("电压低");
-        //    ui->label_V_flag->setStyleSheet("background-color: rgb(225, 0, 0);");
-        //    mV_Flag = "1";
-        //}
-        //else
-        //{
-        //    ui->label_V_flag->setText("正常");
-        //    ui->label_V_flag->setStyleSheet("background-color: rgb(85, 170, 127);");
-        //    mV_Flag = "0";
-        //}
-
-        //i++;
         // Byte7    锂电池SOC
         ui->label_lidiansoc->setNum(UN_Cyc_InquireData.G_Cyc_InquireData.Li_SOC);
 
@@ -865,35 +739,11 @@ void Dialog::ParsingData()
         // Byte[50-51] 输出电量
         ui->label_qingoutdl->setNum(UN_Cyc_InquireData.G_Cyc_InquireData.HJ_Outpower);
 
-        //// Byte[52-53] 氢罐剩余容量
-        //tempint = ((mRec_Buf[i] | mRec_Buf[i+1] << 8));i += 2;
-        //ui->label_qingsyrl->setNum((uint16_t)tempint);
-
-        //// Byte[54-55] 氢罐剩余里程
-        //tempint = ((mRec_Buf[i] | mRec_Buf[i+1] << 8));i += 2;
-        //ui->label_qingsylc->setNum((uint16_t)tempint);
-
-        //// Byte[56-57] 字节对齐
-        //i += 2;
-
-        //// Byte[58-61] 总剩余里程
-        //tempint = ((mRec_Buf[i] | mRec_Buf[i+1] << 8 | mRec_Buf[i+2] << 16 | mRec_Buf[i+3] << 24));i += 4;
-        //ui->label_zsylc->setNum(tempint);
-
-        //// Byte[62-65] 负载端功率
-        //tempint = ((mRec_Buf[i] | mRec_Buf[i+1] << 8 | mRec_Buf[i+2] << 16 | mRec_Buf[i+3] << 24));i += 4;
-        //if (tempint <= 0)
-        //{
-        //    tempint = 0;
-        //}
-        //ui->label_fzdgl->setNum(tempint);
-
         // Byte[66-69] 	氢气总容量
         ui->label_qzrl->setNum(UN_Cyc_InquireData.G_Cyc_InquireData.HB_AllCap);
 
     }
-
-    else if (mRec_Buf[OFFSET_CMD] == CMD_RM_SETTING)
+    else if (mRec_Buf[OFFSET_CMD] == CMD_NORMAL_PARAMS)
     {
         memcpy(UN_Normal_SetDate.G_Normal_SetDate_8, mRec_Buf + SZ_OVERHEAD, mRec_Buf[OFFSET_LEN]);
 
@@ -930,16 +780,8 @@ void Dialog::ParsingData()
         ui->lineEdit_qingqingpingLDSOC->setText(QString::number(UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HP_SetData.HP_ClearCap_B));
 
         //电堆参数设置
-        //// Byte[18] 冷却风扇常开pwm
-        //tempint = mRec_Buf[i++] ;
-        //ui->lineEdit_fengshanChangkaipwm->setText(QString::number(tempint));
-
         // Byte[19] 鼓风机最小pwm
         ui->lineEdit_gufengjipwmMin->setText(QString::number(UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HB_SetData.HB_PWM_min));
-
-        //// Byte[20] 鼓风机常开pwm
-        //tempint = mRec_Buf[i++] ;
-        //ui->lineEdit_gufengjiChangkaipwm->setText(QString::number(tempint));
 
         // Byte[29] 鼓风机开机前运行时间
         ui->lineEdit_gfjKaiJiRuntime->setText(QString::number(UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HB_SetData.BL_RunStartTim));
@@ -1005,75 +847,136 @@ void Dialog::ParsingData()
 
         show_PromptInformation("读取参数成功！");
     }
-    else if (mRec_Buf[4] == 0x03)
+    else if (mRec_Buf[OFFSET_CMD] == CMD_NMOP_SWITCH)
     {
-        show_PromptInformation("设置参数成功！");
+        if(mRec_Buf[OFFSET_DATA + OFFSET_ONE] == CLOSE && mRec_Buf[OFFSET_DATA + OFFSET_TWO] == SUCCEFUL){
+            if(mRec_Buf[OFFSET_DATA] == DEVICE_BLOWER){
+                show_PromptInformation("鼓风机关闭成功!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == DEVICE_FAN){
+                show_PromptInformation("风扇关闭成功!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == DEVICE_VALVEIN){
+                show_PromptInformation("进气阀门关闭成功!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == DEVICE_VALVEOUT){
+                show_PromptInformation("出气阀门关闭成功!!!!");
+            }
+        } else if (mRec_Buf[OFFSET_DATA + OFFSET_ONE] == OPEN && mRec_Buf[OFFSET_DATA + OFFSET_TWO] == SUCCEFUL){
+            if(mRec_Buf[OFFSET_DATA] == DEVICE_BLOWER){
+                show_PromptInformation("鼓风机打开成功!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == DEVICE_FAN){
+                show_PromptInformation("风扇打开成功!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == DEVICE_VALVEIN){
+                show_PromptInformation("进气阀门打开成功!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == DEVICE_VALVEOUT){
+                show_PromptInformation("出气阀门打开成功!!!!");
+            }
+        } else if (mRec_Buf[OFFSET_DATA + OFFSET_ONE] == CLOSE && mRec_Buf[OFFSET_DATA + OFFSET_TWO] == DEFEAT){
+            if(mRec_Buf[OFFSET_DATA] == DEVICE_BLOWER){
+                show_PromptInformation("鼓风机关闭失败!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == DEVICE_FAN){
+                show_PromptInformation("风扇关闭失败!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == DEVICE_VALVEIN){
+                show_PromptInformation("进气阀门关闭失败!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == DEVICE_VALVEOUT){
+                show_PromptInformation("出气阀门关闭失败!!!!");
+            }
+        } else if (mRec_Buf[OFFSET_DATA + OFFSET_ONE] == OPEN && mRec_Buf[OFFSET_DATA + OFFSET_TWO] == DEFEAT){
+            if(mRec_Buf[OFFSET_DATA] == DEVICE_BLOWER){
+                show_PromptInformation("鼓风机打开失败!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == DEVICE_FAN){
+                show_PromptInformation("风扇打开失败!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == DEVICE_VALVEIN){
+                show_PromptInformation("进气阀门打开失败!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == DEVICE_VALVEOUT){
+                show_PromptInformation("出气阀门打开失败!!!!");
+            }
+        }
     }
-    else if (mRec_Buf[4] == 0x04)
-    {
-        show_PromptInformation("初始化参数成功！");
+    else if (mRec_Buf[OFFSET_CMD] == CMD_MODE_SWITCH) {
+        if(mRec_Buf[OFFSET_DATA + OFFSET_ONE] == CLOSE && mRec_Buf[OFFSET_DATA + OFFSET_TWO] == SUCCEFUL){
+            if(mRec_Buf[OFFSET_DATA] == MODE_IMITATE){
+                show_PromptInformation("维修模式关闭成功!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == MODE_MAINTAIN){
+                show_PromptInformation("模拟模式关闭成功!!!!");
+            }
+        } else if (mRec_Buf[OFFSET_DATA + OFFSET_ONE] == OPEN && mRec_Buf[OFFSET_DATA + OFFSET_TWO] == SUCCEFUL){
+            if(mRec_Buf[OFFSET_DATA] == MODE_IMITATE){
+                show_PromptInformation("维修模式打开成功!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == MODE_MAINTAIN){
+                show_PromptInformation("模拟模式打开成功!!!!");
+            }
+        } else if (mRec_Buf[OFFSET_DATA + OFFSET_ONE] == CLOSE && mRec_Buf[OFFSET_DATA + OFFSET_TWO] == DEFEAT){
+            if(mRec_Buf[OFFSET_DATA] == MODE_IMITATE){
+                show_PromptInformation("维修模式关闭失败!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == MODE_MAINTAIN){
+                show_PromptInformation("模拟模式关闭失败!!!!");
+            }
+        } else if (mRec_Buf[OFFSET_DATA + OFFSET_ONE] == OPEN && mRec_Buf[OFFSET_DATA + OFFSET_TWO] == DEFEAT){
+            if(mRec_Buf[OFFSET_DATA] == MODE_IMITATE){
+                show_PromptInformation("维修模式打开失败!!!!");
+            } else if (mRec_Buf[OFFSET_DATA] == MODE_MAINTAIN){
+                show_PromptInformation("模拟模式打开失败!!!!");
+            }
+        }
+
     }
     else if (mRec_Buf[OFFSET_CMD] == CMD_RM_SETTING)
     {
-        memcpy(UN_Repair_InquireData.G_Repair_InquireData_8, mRec_Buf + SZ_OVERHEAD, mRec_Buf[OFFSET_LEN]);
+        if(mRec_Buf[OFFSET_DATA + 14] == SUCCEFUL){
+            memcpy(UN_Repair_InquireData.G_Repair_InquireData_8, mRec_Buf + SZ_OVERHEAD, mRec_Buf[OFFSET_LEN]);
+            //维修模式下燃料电池温度上限
+            ui->lineEdit_WXranliaoTemperMAX->setText(QString::number(UN_Repair_InquireData.G_Cyc_InquireData.HB_Tepmax, 'f', 1));
+            //维修模式下燃料电池目标温度
+            ui->lineEdit_WXranliaoTargetTemper->setText(QString::number(UN_Repair_InquireData.G_Cyc_InquireData.HB_TepTarge, 'f', 1));
+            //鼓风机转速
+            ui->lineEdit_GFJ_PWM->setText(QString::number(UN_Repair_InquireData.G_Cyc_InquireData.HB_BlowerDuty));
+            //排气间隔时间
+            ui->lineEdit_cycleTIM->setText(QString::number(UN_Repair_InquireData.G_Cyc_InquireData.EH_Interval));
+            //排气时间1
+            ui->lineEdit_Exhausttime_Y1->setText(QString::number(UN_Repair_InquireData.G_Cyc_InquireData.EH_Time1, 'f', 1));
 
-        ui->lineEdit_WXranliaoTemperMAX->setText(QString::number(UN_Repair_InquireData.G_Cyc_InquireData.HB_Tepmax, 'f', 1));
+            switch (mRec_Buf[OFFSET_DATA]) {
+            case 0X01:
+                show_PromptInformation("维修模式读取参数成功！");
+                break;
+            case 0X02:
+                show_PromptInformation("维修模式设置参数成功！");
+                break;
+            case 0X03:
+                show_PromptInformation("维修模式初始化参数成功！");
+                break;
+            }
 
-        ui->lineEdit_WXranliaoTargetTemper->setText(QString::number(UN_Repair_InquireData.G_Cyc_InquireData.HB_TepTarge, 'f', 1));
+        } else if(mRec_Buf[OFFSET_DATA + 14] == DEFEAT) {
+            switch (mRec_Buf[OFFSET_DATA]) {
+            case 0X01:
+                show_PromptInformation("维修模式读取参数失败！");
+                break;
+            case 0X02:
+                show_PromptInformation("维修模式设置参数失败！");
+                break;
+            case 0X03:
+                show_PromptInformation("维修模式初始化参数失败！");
+                break;
+            }
+        }
 
-        ui->lineEdit_GFJ_PWM->setText(QString::number(UN_Repair_InquireData.G_Cyc_InquireData.HB_BlowerDuty));
-
-        ui->lineEdit_cycleTIM->setText(QString::number(UN_Repair_InquireData.G_Cyc_InquireData.EH_Interval));
-
-        ui->lineEdit_Exhausttime_Y1->setText(QString::number(UN_Repair_InquireData.G_Cyc_InquireData.EH_Time1, 'f', 1));
-
-        show_PromptInformation("维修模式读取参数成功！");
     }
-    else if (mRec_Buf[4] == 0x08)
-    {
-        show_PromptInformation("维修模式设置参数成功！");
-    }
-    else if (mRec_Buf[4] == 0x0A)
-    {
-        show_PromptInformation("维修模式初始化参数成功！");
-    }
-    else if (mRec_Buf[4] == 0x0C)
-    {
-        show_PromptInformation("写入设置数据成功！");
-    }
-    //else if (mRec_Buf[4] == 0x0D)
-    //{
-    //    if (mRec_Buf[6] == 0x01) {
-    //        tempint = ((mRec_Buf[i + 1] << 8) | mRec_Buf[i + 2]);
-    //        double decimalValue = static_cast<double>(tempint) / 10.0;
-    //        ui->tempLineEdit->setText(QString::number(decimalValue, 'f', 1));
-    //        show_PromptInformation("查询矫正温度成功！");
-    //    } else if (mRec_Buf[6] == 0x02) {
-    //        tempint = ((mRec_Buf[i + 1] << 8) | mRec_Buf[i + 2]);
-    //        double decimalValue = static_cast<double>(tempint) / 10.0;
-    //        ui->tempLineEdit->setText(QString::number(decimalValue, 'f', 1));
-    //        show_PromptInformation("设置矫正温度成功！");
-    //    }
-    //}
-
     mRec_cnt = 0;
 }
 
 void Dialog::sendToKz(uint8_t cmd,uint8_t *buf,uint32_t len)
 {
-    uint32_t i = 0;
-
     if(len!=0)
     {
         memcpy(mSendpcbuf + SZ_OVERHEAD, buf, len);
     }
-    mSendpcbuf[i++] = HEADER_FIRST_BYTE;
-    mSendpcbuf[i++] = HEADER_SECOND_BYTE;
-    mSendpcbuf[i++] = SWJADDR;//
-    mSendpcbuf[i++] = XWJADDR;//cmd
-    mSendpcbuf[i++] = checkcrc8(mSendpcbuf + OFFSET_CMD, len + SZ_CMD + SZ_LEN);
-    mSendpcbuf[i++] = cmd;//cmd
-    mSendpcbuf[i++] = len; //长度
+    mSendpcbuf[OFFSET_HEADER] = HEADER_FIRST_BYTE;
+    mSendpcbuf[OFFSET_HEADER + 1] = HEADER_SECOND_BYTE;
+    mSendpcbuf[OFFSET_SND_ADDR] = SWJADDR;//
+    mSendpcbuf[OFFSET_RCV_ADDR] = XWJADDR;
+    mSendpcbuf[OFFSET_CMD] = cmd;//cmd
+    mSendpcbuf[OFFSET_LEN] = len; //长度
+    mSendpcbuf[OFFSET_CRC] = checkcrc8(mSendpcbuf + OFFSET_CMD, len + SZ_CMD + SZ_LEN);
     send_Data(mSendpcbuf, SZ_OVERHEAD + len);
 }
 
@@ -1119,150 +1022,82 @@ void Dialog::SetParsing()
 {
     if (mIsOpen)
     {
-        uint32_t i = 0;
-        uint32_t tempuint;
-        float tempfl;
-
         /* 电堆参数设置 */
         // 氢电池输出电压下限
-        tempfl = ui->lineEdit_ranliaoDCVMin->text().toFloat();
-        tempuint = tempfl * 10;
-        mSendBuf[i++] = (uint8_t)(tempuint);
-        mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HB_SetData.HB_Vomin = ui->lineEdit_ranliaoDCVMin->text().toFloat();
         // 氢电池温度上限
-        tempfl = ui->lineEdit_ranliaoTemperMAX->text().toFloat();
-        tempuint = tempfl * 10;
-        mSendBuf[i++] = (uint8_t)(tempuint);
-        mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HB_SetData.HB_Tepmax = ui->lineEdit_ranliaoTemperMAX->text().toFloat();
         // 氢电池电流下限
-        tempfl = ui->lineEdit_dianDuiDinliuMin->text().toFloat();
-        tempuint = tempfl * 10;
-        mSendBuf[i++] = (uint8_t)(tempuint);
-        mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HB_SetData.HB_Iomin = ui->lineEdit_dianDuiDinliuMin->text().toFloat();
         // 氢电池目标温度
-        tempfl = ui->lineEdit_ranliaoTargetTemper->text().toFloat();
-        tempuint = tempfl * 10;
-        mSendBuf[i++] = (uint8_t)(tempuint);
-        mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HB_SetData.HB_TepTarge = ui->lineEdit_ranliaoTargetTemper->text().toFloat();
         // 氢电池系数A
-        tempfl = ui->lineEdit_gufengjipwmA->text().toFloat();
-        tempuint = tempfl * 10;
-        mSendBuf[i++] = (uint8_t)(tempuint);
-        mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HB_SetData.HB_PWM_A = ui->lineEdit_gufengjipwmA->text().toFloat();
         // 氢电池系数B
-        tempfl = ui->lineEdit_gufengjipwmB->text().toFloat();
-        tempuint = tempfl * 10;
-        mSendBuf[i++] = (uint8_t)(tempuint);
-        mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HB_SetData.HB_PWM_B = ui->lineEdit_gufengjipwmB->text().toFloat();
         // 电堆超温持续时间
-        mSendBuf[i++] = ui->lineEdit_dianduiOverTempertime->text().toUInt();
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HB_SetData.BL_OvertepTim = ui->lineEdit_dianduiOverTempertime->text().toUInt();
         // 电堆扫风持续时间
-        mSendBuf[i++] = ui->lineEdit_dianduiChiXuChuiFengtime->text().toUInt();
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HB_SetData.BL_HoldTim = ui->lineEdit_dianduiChiXuChuiFengtime->text().toUInt();
         // 鼓风机开机前运行时间
-        mSendBuf[i++] = ui->lineEdit_gfjKaiJiRuntime->text().toUInt();
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HB_SetData.BL_RunStartTim = ui->lineEdit_gfjKaiJiRuntime->text().toUInt();
         // 鼓风机最小占空比
-        mSendBuf[i++] = ui->lineEdit_gufengjipwmMin->text().toUInt();
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HB_SetData.HB_PWM_min = ui->lineEdit_gufengjipwmMin->text().toUInt();
 
         /* 氢罐参数设置 */
         // 氢罐初始容量
-        tempuint = ui->lineEdit_qingzongrongliang->text().toUInt();
-        mSendBuf[i++] = (uint8_t)(tempuint);
-        mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HP_SetData.HP_IntCap = ui->lineEdit_qingzongrongliang->text().toUInt();
         // 氢罐最低电量
-        tempuint = ui->lineEdit_qingzuidizhi->text().toUInt();
-        mSendBuf[i++] = (uint8_t)(tempuint);
-        mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HP_SetData.HP_MinCap = ui->lineEdit_qingzuidizhi->text().toUInt();
         // 氢罐清罐氢罐容量
-        tempuint = ui->lineEdit_qingqingpingrl->text().toUInt();
-        mSendBuf[i++] = (uint8_t)(tempuint);
-        mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HP_SetData.HP_ClearCap_H = ui->lineEdit_qingqingpingrl->text().toUInt();
         // 氢罐清罐电池容量
-        tempuint = ui->lineEdit_qingqingpingLDSOC->text().toUInt();
-        mSendBuf[i++] = (uint8_t)(tempuint);
-        mSendBuf[i++] = (uint8_t)(tempuint >> 8);
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_HP_SetData.HP_ClearCap_B = ui->lineEdit_qingqingpingLDSOC->text().toUInt();
 
         /* 鼓风机循环参数 */
         // 第一次亏空时间
-        mSendBuf[i++] = ui->lineEdit_BLCyc_IntervalFirst->text().toUInt();
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Blower_SetData.BLCyc_IntervalFirst = ui->lineEdit_BLCyc_IntervalFirst->text().toUInt();
         // 循环间隔时间
-        tempuint = ui->lineEdit_gfjjiangetime->text().toUInt();
-        mSendBuf[i++] = (uint8_t)(tempuint);
-        mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Blower_SetData.BLCyc_Interval = ui->lineEdit_gfjjiangetime->text().toUInt();
         // 开持续时间
-        mSendBuf[i++] = ui->lineEdit_gfjchixutimeOpen->text().toUInt();
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Blower_SetData.BLCyc_OpenTim = ui->lineEdit_gfjchixutimeOpen->text().toUInt();
         // 关持续时间
-        mSendBuf[i++] = ui->lineEdit_gfjchixutimeClose->text().toUInt();
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Blower_SetData.BLCyc_CloseTim = ui->lineEdit_gfjchixutimeClose->text().toUInt();
         // 启停次数
-        mSendBuf[i++] = ui->lineEdit_gfjyunxingcishu->text().toUInt();
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Blower_SetData.BLCyc_SSTimes = ui->lineEdit_gfjyunxingcishu->text().toUInt();
 
         /* 排气参数 */
         // 排气间隔时间
-        mSendBuf[i++] = ui->lineEdit_paiqiJiangetime->text().toUInt();
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Exhaust_SetData.EH_Interval = ui->lineEdit_paiqiJiangetime->text().toUInt();
         // 排气时间-1
-        tempfl = ui->lineEdit_paiqitime_1->text().toFloat();
-        tempuint = tempfl * 10;
-        mSendBuf[i++] = (uint8_t)(tempuint);
-        mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Exhaust_SetData.EH_Time1 = ui->lineEdit_paiqitime_1->text().toFloat();
         // 排气时间-2
-        tempfl = ui->lineEdit_paiqitime_2->text().toFloat();
-        tempuint = tempfl * 10;
-        mSendBuf[i++] = (uint8_t)(tempuint);
-        mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Exhaust_SetData.EH_Time2 = ui->lineEdit_paiqitime_2->text().toFloat();
         // 堵水功率
-        tempuint = ui->lineEdit_dddushuiPower->text().toUInt();
-        mSendBuf[i++] = (uint8_t)(tempuint);
-        mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Exhaust_SetData.EH_WaterP = ui->lineEdit_dddushuiPower->text().toUInt();
         // 开机排气次数
-        mSendBuf[i++] = ui->lineEdit_ddKaiJiPaiqingcnt->text().toUInt();
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Exhaust_SetData.EH_StartTimes = ui->lineEdit_ddKaiJiPaiqingcnt->text().toUInt();
         // 堵水排气次数
-        mSendBuf[i++] = ui->lineEdit_ddduishuipaiqicnt->text().toUInt();
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Exhaust_SetData.EH_CycleTimes= ui->lineEdit_ddduishuipaiqicnt->text().toUInt();
 
         /* 锂电池参数 */
         // 锂电池soc上限电压
-        mSendBuf[i++] = ui->lineEdit_lidiankeyongSocShangX->text().toUInt();
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Battery_SetData.LI_SOCMax = ui->lineEdit_lidiankeyongSocShangX->text().toUInt();
         // 锂电池soc下限电压
-        mSendBuf[i++] = ui->lineEdit_lidiankeyongSocXiaX->text().toUInt();
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Battery_SetData.LI_SOCMin = ui->lineEdit_lidiankeyongSocXiaX->text().toUInt();
         // 充电触发Soc
-        mSendBuf[i++] = ui->lineEdit_startchongdianSoc->text().toUInt();
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Battery_SetData.LI_ChargeSoc = ui->lineEdit_startchongdianSoc->text().toUInt();
         // 充电截止Soc
-        mSendBuf[i++] = ui->lineEdit_stopchongdianSoc->text().toUInt();
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Battery_SetData.LI_StopSoc = ui->lineEdit_stopchongdianSoc->text().toUInt();
         // 锂电池电压下限
-        tempfl = ui->lineEdit_anqunVXiaX->text().toFloat();
-        tempuint = tempfl * 10;
-        mSendBuf[i++] = (uint8_t)(tempuint);
-        mSendBuf[i++] = (uint8_t)(tempuint >> 8);
-
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Battery_SetData.LI_Volmin = ui->lineEdit_anqunVXiaX->text().toFloat();
         // 满充换罐次数
-        mSendBuf[i++] = ui->lineEdit_LI_FullCharg_Cyc->text().toUInt();
+        UN_Normal_SetDate.G_Normal_SetDate.G_pUp_Battery_SetData.LI_FullCharg_Cyc = ui->lineEdit_LI_FullCharg_Cyc->text().toUInt();
 
-        sendToKz(CMD_NORMAL_PARAMS, mSendBuf, i);
+        uint8_t buf[sizeof(UN_Normal_SetDate)] = { 0 };
+        memcpy(buf, &UN_Normal_SetDate, sizeof(UN_Normal_SetDate));
+        sendToKz(CMD_NORMAL_PARAMS, buf, sizeof(UN_Normal_SetDate));
     }
-
 }
 
 void Dialog::WXSetParsing()
@@ -1349,67 +1184,23 @@ void Dialog::SaveData()
 void Dialog::RecData()
 {
     qDebug() << "RecData";
-    if (true == mIsOpen)
-    {
-
-        uint8_t rOneByte = 0;
-        QByteArray recvData = mSerialPort->readAll();
-
-        char *pdata = recvData.data();
-        for (uint16_t i = 0; i < recvData.size(); ++i){
-            qDebug("<0x%x>",  *(uint8_t *)(pdata + i));
-        }
-        if (recvData.isEmpty())
-            return;
-
-        int i = 0;
-        while (mRec_cnt < 100) {
-            rOneByte = recvData.at(i++);
-            mRec_Buf[mRec_cnt++] = rOneByte;
-
-            if (mRec_Buf[0] == HEADER_FIRST_BYTE)
-            {
-                if (mRec_cnt >= 5)
-                {
-                    if (mRec_Buf[1] == HEADER_SECOND_BYTE  && mRec_Buf[OFFSET_SND_ADDR] == XWJADDR)
-                    {
-                        if (mRec_Buf[OFFSET_SND_ADDR] == SWJADDR)
-                        {
-                            if (mRec_Buf[OFFSET_LEN] + SZ_OVERHEAD ==  mRec_cnt)
-                            {
-                                ParsingData();
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            mRec_cnt = 0;
-                        }
-                    }
-                    else
-                    {
-                        mRec_cnt = 0;
-                    }
-                }
-            }
-            else
-            {
-                mRec_cnt = 0;
-            }
-        }
-
-        if (mRec_cnt >= 100)
-        {
-            mRec_cnt = 0;
-        }
+    QByteArray recvData = mSerialPort->readAll();
+    char *pdata = recvData.data();
+    uint16_t bufferLen = recvData.size();
+    qDebug() << "SerialPort接收的数据11111111111111111111111111111111111111111111111111";
+    for (uint16_t i = 0; i < bufferLen; ++i)
+        qDebug("<0x%x>", *(uint8_t *)(pdata + i));
+    qDebug() << "SerialPort接收的数据22222222222222222222222222222222222222222222222222";
+    qDebug() << "buffer.size = " << bufferLen;
+    if (!memcmp(headerArray, pdata, sizeof(headerArray))){	//比较相同返回0
+        memcpy(mRec_Buf, pdata, bufferLen);
+        ParsingData();
+        return;
     }
-
 }
-
 
 void Dialog::UpdatePort()
 {
-
     // 智能识别当前系统有效端口号
     QStringList newPortStringList;
     const auto infos = QSerialPortInfo::availablePorts();
@@ -1443,36 +1234,8 @@ void Dialog::send_Data(uint8_t *buf, uint8_t len)
     }
 }
 
-
-
-//void Dialog::on_selectPushButton_clicked()
-//{
-//	uint32_t i = 0;
-//	mSendBuf[i++] = 0x01;
-//	mSendBuf[i++] = 0x00;
-//	mSendBuf[i++] = 0x00;
-//	sendToKz(0x0D, mSendBuf, i);
-//}
-//
-//void Dialog::on_settingPushButton_clicked()
-//{
-//	QString input = ui->tempLineEdit->text();
-//	double value = input.toDouble();
-//	int decimalValue = static_cast<int>(value * 10);
-//	uint32_t i = 0;
-//	mSendBuf[i++] = 0x02;
-//	mSendBuf[i++] = (decimalValue >> 8) & 0xFF;
-//	mSendBuf[i++] = decimalValue & 0xFF;
-//	sendToKz(0x0D, mSendBuf, i);
-//}
-
 void Dialog::periodicQuery()
 {
-    if (mSerialPort->isOpen()) {
-        qDebug() << "The port is opened" << mSerialPort->portName();
-    } else {
-        qDebug() << mSerialPort->portName() << "is closed";
-    }
     uint8_t buf[1] = { 0 };
     buf[0] = 0XAB;
     sendToKz(CMD_PERODIC_QUERY, buf, 1);

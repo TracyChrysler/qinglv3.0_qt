@@ -8,6 +8,26 @@
 #include <QByteArray>
 #include <QTimer>
 #include <QPalette>
+#include <QSerialPortInfo>
+#include <QList>
+#include <QDebug>
+#include <QLineEdit>
+#include <QTimer>
+#include <QSize>
+#include <QByteArray>
+#include <QDateTime>
+#include <QFileDialog>
+#include <QCoreApplication>
+#include <QDir>
+#include <QStringList>
+#include <QPushButton>
+#include <QString>
+#include <QPalette>
+#include <QStringList>
+#include <QVariantMap>
+#include <stdio.h>
+#include <string.h>
+#include <QtSerialPort>
 
 #define SZ_HEADER 2
 #define SZ_SWJADDR 1
@@ -30,10 +50,15 @@
 #define OFFSET_CMD 			(OFFSET_CRC + SZ_CRC)
 #define OFFSET_LEN 			(OFFSET_CMD + SZ_CMD)
 #define OFFSET_DATA 		(OFFSET_LEN + SZ_LEN)
+#define OFFSET_ONE          1
+#define OFFSET_TWO          2
+#define OFFSET_THREE        3
 #define OPEN                0X01
 #define CLOSE               0X00
+#define SUCCEFUL            0X01
+#define DEFEAT              0X00
 
-#define PERIODIC_QUERY_TIME 1000 // unit ms
+#define PERIODIC_QUERY_TIME 5000 // unit ms
 
 enum {
     CMD_PERODIC_QUERY    = 0XA0,
@@ -141,6 +166,7 @@ private:
     uint8_t mSendBuf[100];
     uint8_t mSendCmd[100];
     uint8_t mSendpcbuf[200];
+    uint8_t headerArray[4] = {HEADER_FIRST_BYTE, HEADER_SECOND_BYTE, XWJADDR, SWJADDR};
     QTimer *mSaveTimer;
     QTimer *periodicQueryTimer;
     QString mTemp_Flag;

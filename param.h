@@ -42,7 +42,7 @@ typedef struct
     uint16_t BL_RunStartTim;  //鼓风机开机前运行时间
     uint16_t HB_PWM_min;      //鼓风机最小占空比
 
-} pUp_HB_SetData;  //电堆参数设置  32byte
+} pUp_HB_SetData;  //氢堆参数设置  32byte
 
 typedef struct
 {
@@ -90,7 +90,7 @@ typedef struct
     float HB_Tepmax;               //维修模式下燃料电池温度上限
     float HB_TepTarge;             //维修模式下燃料电池目标温度
     uint8_t HB_BlowerDuty;         //维修模式下鼓风机转速
-} pUp_Repair_SetData;  //电池参数设置  13byte
+} pUp_Repair_SetData;  //维修参数设置  13byte
 
 union
 {
@@ -119,5 +119,5 @@ union
 {
     uint8_t G_Repair_InquireData_8[sizeof(pUp_Repair_SetData)]; //size = 13
     pUp_Repair_SetData  G_Cyc_InquireData;
-}UN_Repair_InquireData;   //循环查询数据
+}UN_Repair_InquireData;   //维修数据
 #endif // PARAM_H
