@@ -37,789 +37,6 @@
       <property name="bottomMargin">
        <number>1</number>
       </property>
-      <item row="1" column="0">
-       <widget class="QWidget" name="widget_68" native="true">
-        <layout class="QGridLayout" name="gridLayout_47">
-         <item row="0" column="3">
-          <widget class="QWidget" name="widget_70" native="true">
-           <layout class="QVBoxLayout" name="verticalLayout_8">
-            <property name="leftMargin">
-             <number>1</number>
-            </property>
-            <property name="topMargin">
-             <number>1</number>
-            </property>
-            <property name="rightMargin">
-             <number>1</number>
-            </property>
-            <property name="bottomMargin">
-             <number>1</number>
-            </property>
-            <item>
-             <widget class="QGroupBox" name="groupBox_3">
-              <property name="font">
-               <font>
-                <family>Arial</family>
-               </font>
-              </property>
-              <property name="title">
-               <string>参数设置</string>
-              </property>
-              <layout class="QHBoxLayout" name="horizontalLayout_9">
-               <property name="leftMargin">
-                <number>1</number>
-               </property>
-               <property name="topMargin">
-                <number>1</number>
-               </property>
-               <property name="rightMargin">
-                <number>1</number>
-               </property>
-               <property name="bottomMargin">
-                <number>1</number>
-               </property>
-               <item>
-                <widget class="QWidget" name="widget_47" native="true">
-                 <property name="font">
-                  <font>
-                   <family>Arial</family>
-                   <pointsize>10</pointsize>
-                  </font>
-                 </property>
-                 <layout class="QGridLayout" name="gridLayout_45">
-                  <property name="leftMargin">
-                   <number>1</number>
-                  </property>
-                  <property name="topMargin">
-                   <number>1</number>
-                  </property>
-                  <property name="rightMargin">
-                   <number>1</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>1</number>
-                  </property>
-                  <item row="1" column="0">
-                   <widget class="QPushButton" name="pushButton_write">
-                    <property name="font">
-                     <font>
-                      <family>Arial</family>
-                      <pointsize>10</pointsize>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>写入参数</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QPushButton" name="pushButton_read">
-                    <property name="maximumSize">
-                     <size>
-                      <width>188</width>
-                      <height>24</height>
-                     </size>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <family>Arial</family>
-                      <pointsize>10</pointsize>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>读取参数</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QPushButton" name="pushButton_init">
-                    <property name="font">
-                     <font>
-                      <family>Arial</family>
-                      <pointsize>10</pointsize>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>初始参数</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QGroupBox" name="groupBox_12">
-           <property name="maximumSize">
-            <size>
-             <width>400</width>
-             <height>326</height>
-            </size>
-           </property>
-           <property name="title">
-            <string>锂电池</string>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_38">
-            <property name="leftMargin">
-             <number>1</number>
-            </property>
-            <property name="topMargin">
-             <number>1</number>
-            </property>
-            <property name="rightMargin">
-             <number>1</number>
-            </property>
-            <property name="bottomMargin">
-             <number>1</number>
-            </property>
-            <item row="0" column="0">
-             <widget class="QWidget" name="widget_32" native="true">
-              <property name="font">
-               <font>
-                <family>Arial</family>
-               </font>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_30">
-               <property name="leftMargin">
-                <number>9</number>
-               </property>
-               <property name="topMargin">
-                <number>9</number>
-               </property>
-               <property name="rightMargin">
-                <number>9</number>
-               </property>
-               <property name="bottomMargin">
-                <number>9</number>
-               </property>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_79">
-                 <property name="text">
-                  <string>电堆充电SOC触发：</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_76">
-                 <property name="text">
-                  <string>锂电池可用SOC上限：</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="label_78">
-                 <property name="text">
-                  <string>电堆停止充电截止SOC：</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_77">
-                 <property name="text">
-                  <string>锂电池可用SOC下限：</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_75">
-                 <property name="text">
-                  <string>锂电池安全下限电压：</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="0">
-                <widget class="QLabel" name="label_111">
-                 <property name="text">
-                  <string>充满换罐次数：</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QWidget" name="widget_42" native="true">
-              <property name="font">
-               <font>
-                <family>Arial</family>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_37">
-               <property name="leftMargin">
-                <number>9</number>
-               </property>
-               <property name="topMargin">
-                <number>9</number>
-               </property>
-               <property name="rightMargin">
-                <number>9</number>
-               </property>
-               <property name="bottomMargin">
-                <number>9</number>
-               </property>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_154">
-                 <property name="text">
-                  <string>%</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_151">
-                 <property name="text">
-                  <string>V</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="label_142">
-                 <property name="text">
-                  <string>%</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLabel" name="label_152">
-                 <property name="text">
-                  <string>%</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_145">
-                 <property name="text">
-                  <string>%</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="5" column="0">
-                <widget class="QLabel" name="label_122">
-                 <property name="text">
-                  <string>次</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QWidget" name="widget_41" native="true">
-              <property name="font">
-               <font>
-                <family>Arial</family>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_34">
-               <property name="leftMargin">
-                <number>1</number>
-               </property>
-               <property name="topMargin">
-                <number>1</number>
-               </property>
-               <property name="rightMargin">
-                <number>1</number>
-               </property>
-               <property name="bottomMargin">
-                <number>1</number>
-               </property>
-               <item row="5" column="0">
-                <widget class="QLineEdit" name="lineEdit_LI_FullCharg_Cyc">
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="4" column="0">
-                <widget class="QLineEdit" name="lineEdit_stopchongdianSoc">
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLineEdit" name="lineEdit_lidiankeyongSocXiaX">
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="2" column="0">
-                <widget class="QLineEdit" name="lineEdit_lidiankeyongSocShangX">
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLineEdit" name="lineEdit_startchongdianSoc">
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLineEdit" name="lineEdit_anqunVXiaX">
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item row="0" column="1" colspan="2">
-          <widget class="QGroupBox" name="groupBox_10">
-           <property name="font">
-            <font>
-             <family>Arial</family>
-            </font>
-           </property>
-           <property name="title">
-            <string>排气</string>
-           </property>
-           <layout class="QGridLayout" name="gridLayout_67">
-            <item row="0" column="0" rowspan="3" colspan="2">
-             <widget class="QWidget" name="widget_31" native="true">
-              <layout class="QGridLayout" name="gridLayout_63">
-               <item row="0" column="2">
-                <widget class="QWidget" name="widget_55" native="true">
-                 <property name="maximumSize">
-                  <size>
-                   <width>50</width>
-                   <height>330</height>
-                  </size>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <family>Arial</family>
-                   <pointsize>10</pointsize>
-                  </font>
-                 </property>
-                 <layout class="QGridLayout" name="gridLayout_59">
-                  <property name="leftMargin">
-                   <number>9</number>
-                  </property>
-                  <property name="topMargin">
-                   <number>9</number>
-                  </property>
-                  <property name="rightMargin">
-                   <number>9</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>9</number>
-                  </property>
-                  <item row="4" column="0">
-                   <widget class="QLabel" name="label_141">
-                    <property name="maximumSize">
-                     <size>
-                      <width>100</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>W</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="label_147">
-                    <property name="maximumSize">
-                     <size>
-                      <width>100</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>S</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="5" column="0">
-                   <widget class="QLabel" name="label_150">
-                    <property name="maximumSize">
-                     <size>
-                      <width>100</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>次</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="label_148">
-                    <property name="maximumSize">
-                     <size>
-                      <width>100</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>S</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_143">
-                    <property name="maximumSize">
-                     <size>
-                      <width>100</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>S</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="0">
-                   <widget class="QLabel" name="label_149">
-                    <property name="maximumSize">
-                     <size>
-                      <width>100</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                    <property name="text">
-                     <string>次</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QWidget" name="widget_10" native="true">
-                 <property name="font">
-                  <font>
-                   <family>Arial</family>
-                  </font>
-                 </property>
-                 <layout class="QGridLayout" name="gridLayout_29">
-                  <property name="leftMargin">
-                   <number>1</number>
-                  </property>
-                  <property name="topMargin">
-                   <number>1</number>
-                  </property>
-                  <property name="rightMargin">
-                   <number>1</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>1</number>
-                  </property>
-                  <item row="4" column="0">
-                   <widget class="QLabel" name="label_135">
-                    <property name="text">
-                     <string>电机堵水时功率预警值：</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_137">
-                    <property name="text">
-                     <string>排气时间-1：</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="0">
-                   <widget class="QLabel" name="label_131">
-                    <property name="text">
-                     <string>电堆开机排氢次数：</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="label_136">
-                    <property name="text">
-                     <string>间隔时间：</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="5" column="0">
-                   <widget class="QLabel" name="label_132">
-                    <property name="text">
-                     <string>电堆堵水时排气阀循环次数：</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="label_130">
-                    <property name="text">
-                     <string>排气时间-2：</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-               <item row="0" column="3">
-                <widget class="QWidget" name="widget_66" native="true">
-                 <layout class="QGridLayout" name="gridLayout_66">
-                  <property name="leftMargin">
-                   <number>1</number>
-                  </property>
-                  <property name="topMargin">
-                   <number>1</number>
-                  </property>
-                  <property name="rightMargin">
-                   <number>1</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>1</number>
-                  </property>
-                  <item row="0" column="0">
-                   <widget class="QWidget" name="widget_39" native="true">
-                    <property name="font">
-                     <font>
-                      <family>Arial</family>
-                     </font>
-                    </property>
-                    <layout class="QGridLayout" name="gridLayout_64">
-                     <property name="leftMargin">
-                      <number>1</number>
-                     </property>
-                     <property name="topMargin">
-                      <number>1</number>
-                     </property>
-                     <property name="rightMargin">
-                      <number>1</number>
-                     </property>
-                     <property name="bottomMargin">
-                      <number>1</number>
-                     </property>
-                     <item row="2" column="0">
-                      <widget class="QLabel" name="label_139">
-                       <property name="text">
-                        <string>氢气进口开关：</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="1" column="0">
-                      <widget class="QLabel" name="label_138">
-                       <property name="text">
-                        <string>冷却风扇常开开关：</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="0" column="0">
-                      <widget class="QLabel" name="label_133">
-                       <property name="text">
-                        <string>鼓风机常开开关：</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="3" column="0">
-                      <widget class="QLabel" name="label_140">
-                       <property name="text">
-                        <string>氢气出口开关：</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QWidget" name="widget_40" native="true">
-                    <property name="maximumSize">
-                     <size>
-                      <width>120</width>
-                      <height>330</height>
-                     </size>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <family>Arial</family>
-                      <pointsize>10</pointsize>
-                     </font>
-                    </property>
-                    <layout class="QGridLayout" name="gridLayout_65">
-                     <property name="leftMargin">
-                      <number>1</number>
-                     </property>
-                     <property name="topMargin">
-                      <number>1</number>
-                     </property>
-                     <property name="rightMargin">
-                      <number>1</number>
-                     </property>
-                     <property name="bottomMargin">
-                      <number>1</number>
-                     </property>
-                     <item row="1" column="0">
-                      <widget class="QPushButton" name="pushButton_fsck">
-                       <property name="maximumSize">
-                        <size>
-                         <width>100</width>
-                         <height>25</height>
-                        </size>
-                       </property>
-                       <property name="text">
-                        <string>打开</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="2" column="0">
-                      <widget class="QPushButton" name="pushButton_qingin">
-                       <property name="text">
-                        <string>打开</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="3" column="0">
-                      <widget class="QPushButton" name="pushButton_qingout">
-                       <property name="maximumSize">
-                        <size>
-                         <width>100</width>
-                         <height>25</height>
-                        </size>
-                       </property>
-                       <property name="text">
-                        <string>打开</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item row="0" column="0">
-                      <widget class="QPushButton" name="pushButton_gfjck">
-                       <property name="maximumSize">
-                        <size>
-                         <width>100</width>
-                         <height>25</height>
-                        </size>
-                       </property>
-                       <property name="text">
-                        <string>打开</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-               <item row="0" column="1">
-                <widget class="QWidget" name="widget_11" native="true">
-                 <property name="font">
-                  <font>
-                   <family>Arial</family>
-                   <pointsize>10</pointsize>
-                  </font>
-                 </property>
-                 <layout class="QGridLayout" name="gridLayout_39">
-                  <property name="leftMargin">
-                   <number>1</number>
-                  </property>
-                  <property name="topMargin">
-                   <number>1</number>
-                  </property>
-                  <property name="rightMargin">
-                   <number>1</number>
-                  </property>
-                  <property name="bottomMargin">
-                   <number>1</number>
-                  </property>
-                  <item row="1" column="0">
-                   <widget class="QLineEdit" name="lineEdit_paiqitime_1">
-                    <property name="maximumSize">
-                     <size>
-                      <width>100</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QLineEdit" name="lineEdit_paiqiJiangetime">
-                    <property name="maximumSize">
-                     <size>
-                      <width>100</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="4" column="0">
-                   <widget class="QLineEdit" name="lineEdit_dddushuiPower">
-                    <property name="maximumSize">
-                     <size>
-                      <width>100</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="0">
-                   <widget class="QLineEdit" name="lineEdit_ddKaiJiPaiqingcnt">
-                    <property name="maximumSize">
-                     <size>
-                      <width>100</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="5" column="0">
-                   <widget class="QLineEdit" name="lineEdit_ddduishuipaiqicnt">
-                    <property name="maximumSize">
-                     <size>
-                      <width>100</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLineEdit" name="lineEdit_paiqitime_2">
-                    <property name="maximumSize">
-                     <size>
-                      <width>100</width>
-                      <height>25</height>
-                     </size>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
       <item row="0" column="0" colspan="2">
        <widget class="QWidget" name="widget_67" native="true">
         <layout class="QGridLayout" name="gridLayout_46">
@@ -856,6 +73,58 @@
             <property name="bottomMargin">
              <number>9</number>
             </property>
+            <item row="0" column="1">
+             <widget class="QWidget" name="widget_44" native="true">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_41">
+               <item row="2" column="0">
+                <widget class="QLineEdit" name="lineEdit_qingqingpingrl">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLineEdit" name="lineEdit_qingzongrongliang">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLineEdit" name="lineEdit_qingzuidizhi">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLineEdit" name="lineEdit_qingqingpingLDSOC">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
             <item row="0" column="0">
              <widget class="QWidget" name="widget_43" native="true">
               <layout class="QGridLayout" name="gridLayout_40">
@@ -936,58 +205,6 @@
                 <widget class="QLabel" name="label_155">
                  <property name="text">
                   <string>%</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QWidget" name="widget_44" native="true">
-              <property name="font">
-               <font>
-                <family>Arial</family>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_41">
-               <item row="2" column="0">
-                <widget class="QLineEdit" name="lineEdit_qingqingpingrl">
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLineEdit" name="lineEdit_qingzongrongliang">
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLineEdit" name="lineEdit_qingzuidizhi">
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="3" column="0">
-                <widget class="QLineEdit" name="lineEdit_qingqingpingLDSOC">
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>25</height>
-                  </size>
                  </property>
                 </widget>
                </item>
@@ -1395,6 +612,13 @@
                  </property>
                 </widget>
                </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="label_98">
+                 <property name="text">
+                  <string>第一次亏空时间：</string>
+                 </property>
+                </widget>
+               </item>
                <item row="2" column="0">
                 <widget class="QLabel" name="label_62">
                  <property name="text">
@@ -1409,10 +633,10 @@
                  </property>
                 </widget>
                </item>
-               <item row="4" column="0">
-                <widget class="QLabel" name="label_98">
+               <item row="5" column="0">
+                <widget class="QLabel" name="label_18">
                  <property name="text">
-                  <string>第一次亏空时间：</string>
+                  <string>鼓风机常开PWM：</string>
                  </property>
                 </widget>
                </item>
@@ -1427,30 +651,8 @@
                 <pointsize>10</pointsize>
                </font>
               </property>
-              <layout class="QGridLayout" name="gridLayout_35">
-               <property name="leftMargin">
-                <number>9</number>
-               </property>
-               <property name="topMargin">
-                <number>9</number>
-               </property>
-               <property name="rightMargin">
-                <number>9</number>
-               </property>
-               <property name="bottomMargin">
-                <number>9</number>
-               </property>
-               <item row="1" column="0">
-                <widget class="QLineEdit" name="lineEdit_gfjyunxingcishu">
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
+              <layout class="QVBoxLayout" name="verticalLayout_7">
+               <item>
                 <widget class="QLineEdit" name="lineEdit_gfjjiangetime">
                  <property name="maximumSize">
                   <size>
@@ -1460,8 +662,8 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="0">
-                <widget class="QLineEdit" name="lineEdit_gfjchixutimeClose">
+               <item>
+                <widget class="QLineEdit" name="lineEdit_gfjyunxingcishu">
                  <property name="maximumSize">
                   <size>
                    <width>100</width>
@@ -1470,7 +672,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
+               <item>
                 <widget class="QLineEdit" name="lineEdit_gfjchixutimeOpen">
                  <property name="maximumSize">
                   <size>
@@ -1480,8 +682,28 @@
                  </property>
                 </widget>
                </item>
-               <item row="4" column="0">
+               <item>
+                <widget class="QLineEdit" name="lineEdit_gfjchixutimeClose">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <widget class="QLineEdit" name="lineEdit_BLCyc_IntervalFirst">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_blowerpwm">
                  <property name="maximumSize">
                   <size>
                    <width>100</width>
@@ -1547,6 +769,824 @@
                  <property name="text">
                   <string>S</string>
                  </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_21">
+                 <property name="text">
+                  <string>%</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QWidget" name="widget_68" native="true">
+        <layout class="QGridLayout" name="gridLayout_47">
+         <item row="0" column="0">
+          <widget class="QGroupBox" name="groupBox_12">
+           <property name="maximumSize">
+            <size>
+             <width>400</width>
+             <height>326</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>锂电池</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_38">
+            <property name="leftMargin">
+             <number>1</number>
+            </property>
+            <property name="topMargin">
+             <number>1</number>
+            </property>
+            <property name="rightMargin">
+             <number>1</number>
+            </property>
+            <property name="bottomMargin">
+             <number>1</number>
+            </property>
+            <item row="0" column="2">
+             <widget class="QWidget" name="widget_42" native="true">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_37">
+               <property name="leftMargin">
+                <number>9</number>
+               </property>
+               <property name="topMargin">
+                <number>9</number>
+               </property>
+               <property name="rightMargin">
+                <number>9</number>
+               </property>
+               <property name="bottomMargin">
+                <number>9</number>
+               </property>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_154">
+                 <property name="text">
+                  <string>%</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_152">
+                 <property name="text">
+                  <string>%</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <widget class="QLabel" name="label_122">
+                 <property name="text">
+                  <string>次</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_145">
+                 <property name="text">
+                  <string>%</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_151">
+                 <property name="text">
+                  <string>V</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="label_142">
+                 <property name="text">
+                  <string>%</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QWidget" name="widget_41" native="true">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_34">
+               <item row="0" column="0">
+                <widget class="QLineEdit" name="lineEdit_anqunVXiaX">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLineEdit" name="lineEdit_lidiankeyongSocXiaX">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLineEdit" name="lineEdit_lidiankeyongSocShangX">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLineEdit" name="lineEdit_startchongdianSoc">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLineEdit" name="lineEdit_stopchongdianSoc">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>25</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <widget class="QLineEdit" name="lineEdit_stopchongdianV">
+                 <property name="maximumSize">
+                  <size>
+                   <width>101</width>
+                   <height>22</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0">
+                <widget class="QLineEdit" name="lineEdit_stopchongdianI">
+                 <property name="maximumSize">
+                  <size>
+                   <width>101</width>
+                   <height>22</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="0">
+                <widget class="QLineEdit" name="lineEdit_LI_FullCharg_Cyc">
+                 <property name="maximumSize">
+                  <size>
+                   <width>100</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QWidget" name="widget_32" native="true">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+               </font>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_30">
+               <property name="leftMargin">
+                <number>9</number>
+               </property>
+               <property name="topMargin">
+                <number>9</number>
+               </property>
+               <property name="rightMargin">
+                <number>9</number>
+               </property>
+               <property name="bottomMargin">
+                <number>9</number>
+               </property>
+               <item row="7" column="0">
+                <widget class="QLabel" name="label_111">
+                 <property name="text">
+                  <string>充满换罐次数：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_75">
+                 <property name="text">
+                  <string>锂电池安全下限电压：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_79">
+                 <property name="text">
+                  <string>电堆充电SOC触发：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_77">
+                 <property name="text">
+                  <string>锂电池可用SOC下限：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <widget class="QLabel" name="label_70">
+                 <property name="text">
+                  <string>充电截止电压：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_76">
+                 <property name="text">
+                  <string>锂电池可用SOC上限：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0">
+                <widget class="QLabel" name="label_71">
+                 <property name="text">
+                  <string>充电截止电流：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="label_78">
+                 <property name="text">
+                  <string>电堆停止充电截止SOC：</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QWidget" name="widget_70" native="true">
+           <layout class="QVBoxLayout" name="verticalLayout_8">
+            <property name="leftMargin">
+             <number>1</number>
+            </property>
+            <property name="topMargin">
+             <number>1</number>
+            </property>
+            <property name="rightMargin">
+             <number>1</number>
+            </property>
+            <property name="bottomMargin">
+             <number>1</number>
+            </property>
+            <item>
+             <widget class="QGroupBox" name="groupBox_3">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+               </font>
+              </property>
+              <property name="title">
+               <string>参数设置</string>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_9">
+               <property name="leftMargin">
+                <number>1</number>
+               </property>
+               <property name="topMargin">
+                <number>1</number>
+               </property>
+               <property name="rightMargin">
+                <number>1</number>
+               </property>
+               <property name="bottomMargin">
+                <number>1</number>
+               </property>
+               <item>
+                <widget class="QWidget" name="widget_47" native="true">
+                 <property name="font">
+                  <font>
+                   <family>Arial</family>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_45">
+                  <property name="leftMargin">
+                   <number>1</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>1</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>1</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>1</number>
+                  </property>
+                  <item row="2" column="0">
+                   <widget class="QPushButton" name="pushButton_init">
+                    <property name="font">
+                     <font>
+                      <family>Arial</family>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>初始参数</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QPushButton" name="pushButton_write">
+                    <property name="font">
+                     <font>
+                      <family>Arial</family>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>写入参数</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QPushButton" name="pushButton_read">
+                    <property name="maximumSize">
+                     <size>
+                      <width>188</width>
+                      <height>24</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Arial</family>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <property name="text">
+                     <string>读取参数</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="0" column="1" colspan="2">
+          <widget class="QGroupBox" name="groupBox_10">
+           <property name="font">
+            <font>
+             <family>Arial</family>
+            </font>
+           </property>
+           <property name="title">
+            <string>排气</string>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_67">
+            <item row="0" column="0" rowspan="3" colspan="2">
+             <widget class="QWidget" name="widget_31" native="true">
+              <layout class="QGridLayout" name="gridLayout_63">
+               <item row="0" column="0">
+                <widget class="QWidget" name="widget_10" native="true">
+                 <property name="font">
+                  <font>
+                   <family>Arial</family>
+                  </font>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_29">
+                  <property name="leftMargin">
+                   <number>1</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>1</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>1</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>1</number>
+                  </property>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="label_131">
+                    <property name="text">
+                     <string>电堆开机排氢次数：</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="label_24">
+                    <property name="text">
+                     <string>风扇常开PWM：</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="label_135">
+                    <property name="text">
+                     <string>电机堵水时功率预警值：</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_130">
+                    <property name="text">
+                     <string>排气时间-2：</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="0">
+                   <widget class="QLabel" name="label_132">
+                    <property name="text">
+                     <string>电堆堵水时排气阀循环次数：</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_137">
+                    <property name="text">
+                     <string>排气时间-1：</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_136">
+                    <property name="text">
+                     <string>间隔时间：</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QWidget" name="widget_55" native="true">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>330</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <family>Arial</family>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_9">
+                  <item>
+                   <widget class="QLabel" name="label_147">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>S</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_143">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>S</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_148">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>S</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_149">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>次</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_141">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>W</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_150">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>次</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="label_156">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                    <property name="text">
+                     <string>%</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QWidget" name="widget_66" native="true">
+                 <layout class="QGridLayout" name="gridLayout_66">
+                  <property name="leftMargin">
+                   <number>1</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>1</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>1</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>1</number>
+                  </property>
+                  <item row="0" column="0">
+                   <widget class="QWidget" name="widget_39" native="true">
+                    <property name="font">
+                     <font>
+                      <family>Arial</family>
+                     </font>
+                    </property>
+                    <layout class="QGridLayout" name="gridLayout_64">
+                     <property name="leftMargin">
+                      <number>1</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>1</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>1</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>1</number>
+                     </property>
+                     <item row="2" column="0">
+                      <widget class="QLabel" name="label_139">
+                       <property name="text">
+                        <string>氢气进口开关：</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="0">
+                      <widget class="QLabel" name="label_138">
+                       <property name="text">
+                        <string>冷却风扇常开开关：</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="0">
+                      <widget class="QLabel" name="label_133">
+                       <property name="text">
+                        <string>鼓风机常开开关：</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="0">
+                      <widget class="QLabel" name="label_140">
+                       <property name="text">
+                        <string>氢气出口开关：</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QWidget" name="widget_40" native="true">
+                    <property name="maximumSize">
+                     <size>
+                      <width>120</width>
+                      <height>330</height>
+                     </size>
+                    </property>
+                    <property name="font">
+                     <font>
+                      <family>Arial</family>
+                      <pointsize>10</pointsize>
+                     </font>
+                    </property>
+                    <layout class="QGridLayout" name="gridLayout_65">
+                     <property name="leftMargin">
+                      <number>1</number>
+                     </property>
+                     <property name="topMargin">
+                      <number>1</number>
+                     </property>
+                     <property name="rightMargin">
+                      <number>1</number>
+                     </property>
+                     <property name="bottomMargin">
+                      <number>1</number>
+                     </property>
+                     <item row="1" column="0">
+                      <widget class="QPushButton" name="pushButton_fsck">
+                       <property name="maximumSize">
+                        <size>
+                         <width>100</width>
+                         <height>25</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>打开</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="0">
+                      <widget class="QPushButton" name="pushButton_qingin">
+                       <property name="text">
+                        <string>打开</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="0">
+                      <widget class="QPushButton" name="pushButton_qingout">
+                       <property name="maximumSize">
+                        <size>
+                         <width>100</width>
+                         <height>25</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>打开</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="0">
+                      <widget class="QPushButton" name="pushButton_gfjck">
+                       <property name="maximumSize">
+                        <size>
+                         <width>100</width>
+                         <height>25</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>打开</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QWidget" name="widget_11" native="true">
+                 <property name="font">
+                  <font>
+                   <family>Arial</family>
+                   <pointsize>10</pointsize>
+                  </font>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_35">
+                  <item row="0" column="0">
+                   <widget class="QLineEdit" name="lineEdit_paiqiJiangetime">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLineEdit" name="lineEdit_paiqitime_1">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLineEdit" name="lineEdit_paiqitime_2">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLineEdit" name="lineEdit_ddKaiJiPaiqingcnt">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLineEdit" name="lineEdit_dddushuiPower">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="0">
+                   <widget class="QLineEdit" name="lineEdit_ddduishuipaiqicnt">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="0">
+                   <widget class="QLineEdit" name="lineEdit_fanpwm">
+                    <property name="maximumSize">
+                     <size>
+                      <width>100</width>
+                      <height>25</height>
+                     </size>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
               </layout>
@@ -3522,8 +3562,8 @@
             <item row="0" column="0">
              <widget class="QWidget" name="widget_7" native="true">
               <layout class="QGridLayout" name="gridLayout_10">
-               <item row="0" column="0">
-                <widget class="QLabel" name="label_54">
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_86">
                  <property name="font">
                   <font>
                    <family>Arial</family>
@@ -3531,7 +3571,7 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>燃料电池电压：</string>
+                  <string>氢气罐泄露：</string>
                  </property>
                 </widget>
                </item>
@@ -3544,12 +3584,12 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>燃料电池温度：</string>
+                  <string>氢气罐过压：</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
-                <widget class="QLabel" name="label_86">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_54">
                  <property name="font">
                   <font>
                    <family>Arial</family>
@@ -3557,7 +3597,14 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>气瓶氢量：</string>
+                  <string>氢气罐容量：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_72">
+                 <property name="text">
+                  <string>过温保护：</string>
                  </property>
                 </widget>
                </item>
@@ -3566,9 +3613,9 @@
             </item>
             <item row="0" column="1">
              <widget class="QWidget" name="widget_8" native="true">
-              <layout class="QGridLayout" name="gridLayout_13">
+              <layout class="QGridLayout" name="gridLayout_60">
                <item row="0" column="0">
-                <widget class="QLabel" name="label_V_flag">
+                <widget class="QLabel" name="label_qqgrl">
                  <property name="font">
                   <font>
                    <family>Arial</family>
@@ -3584,7 +3631,7 @@
                 </widget>
                </item>
                <item row="1" column="0">
-                <widget class="QLabel" name="label_temp_flag">
+                <widget class="QLabel" name="label_qqggy">
                  <property name="font">
                   <font>
                    <family>Arial</family>
@@ -3600,7 +3647,145 @@
                 </widget>
                </item>
                <item row="2" column="0">
-                <widget class="QLabel" name="label_qing_flag">
+                <widget class="QLabel" name="label_qqgxl">
+                 <property name="font">
+                  <font>
+                   <family>Arial</family>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>正常</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_gwbh">
+                 <property name="font">
+                  <font>
+                   <family>Arial</family>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>正常</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QWidget" name="widget_18" native="true">
+              <layout class="QGridLayout" name="gridLayout_13">
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_108">
+                 <property name="font">
+                  <font>
+                   <family>Arial</family>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>PT1000：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_109">
+                 <property name="font">
+                  <font>
+                   <family>Arial</family>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>鼓风机：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_69">
+                 <property name="font">
+                  <font>
+                   <family>Arial</family>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>燃料堆欠压：</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_73">
+                 <property name="text">
+                  <string>充电：</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QWidget" name="widget_19" native="true">
+              <layout class="QGridLayout" name="gridLayout_71">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_rldqy">
+                 <property name="font">
+                  <font>
+                   <family>Arial</family>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>正常</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_gfj">
+                 <property name="font">
+                  <font>
+                   <family>Arial</family>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>正常</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_pt1000">
+                 <property name="font">
+                  <font>
+                   <family>Arial</family>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>正常</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_cd">
                  <property name="font">
                   <font>
                    <family>Arial</family>

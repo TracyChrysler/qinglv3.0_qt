@@ -79,9 +79,17 @@ typedef struct
     uint8_t LI_SOCMin;                //锂电池SOC下限
     uint8_t LI_ChargeSoc;             //充电触发SOC
     uint8_t LI_StopSoc;               //充电截止SOC
+    float LI_StopV;				  //充电截止电压
+    float LI_StopI;				  //充电截止电流
     float LI_Volmin;                  //锂电池电压下限
     uint8_t LI_FullCharg_Cyc;         //满充换罐次数
 } pUp_Battery_SetData;  //电池参数设置  9byte
+
+typedef struct
+{
+    uint8_t NoropenPWM_Blower;        //鼓风机常开PWM
+    uint8_t NoropenPWM_Fan;           //风扇常开PWM
+} pUp_Noropen_SetData;  //pwm参数设置  2byte
 
 typedef struct
 {
@@ -96,7 +104,7 @@ union
 {
     uint8_t G_Normal_SetDate_8[(sizeof(pUp_HB_SetData)+ sizeof(pUp_HP_SetData)
              +sizeof(pUp_Blower_SetData) +sizeof(pUp_Exhaust_SetData)
-                 + sizeof(pUp_Battery_SetData))];   // size = 69
+                 + sizeof(pUp_Battery_SetData) + sizeof (pUp_Noropen_SetData))];   // size = 69
     struct
     {
     pUp_HB_SetData        G_pUp_HB_SetData;  //电堆参数设置  32byte
@@ -104,6 +112,7 @@ union
     pUp_Blower_SetData    G_pUp_Blower_SetData; //鼓风机循环参数设置  10byte
     pUp_Exhaust_SetData   G_pUp_Exhaust_SetData; //排气循环参数设置  10byte
     pUp_Battery_SetData   G_pUp_Battery_SetData; //电池参数设置  9byte
+    pUp_Noropen_SetData   G_pUp_Noropen_SetData;
     }
     G_Normal_SetDate;
 }UN_Normal_SetDate;   //普通设置参数

@@ -18,7 +18,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     dialog.cpp \
-    savedata.cpp
+    savedata.cpp \
+    slots.cpp
 
 HEADERS += \
     dialog.h \
